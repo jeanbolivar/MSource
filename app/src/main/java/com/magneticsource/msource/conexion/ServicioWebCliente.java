@@ -14,7 +14,7 @@ import org.ksoap2.transport.HttpTransportSE;
  * 
  */
 public class ServicioWebCliente {
-	protected static String NAMESPACE = "http://services.academico.ulasalle.com";
+	protected static String NAMESPACE = "test";
 	protected static String HOST = "http://www.nfcattack.com/www/";
 
 	protected static String getString(String metodo, SoapObject peticion,
