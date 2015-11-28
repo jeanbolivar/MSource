@@ -11,7 +11,7 @@ public class LoginCliente extends ServicioWebCliente {
 	private static String URL = HOST + "/Login.php?wsdl";
 
 	public static Boolean verificarDatos(String dni, String clave) {
-		String Metodo = "sesionValida";
+		String Metodo = "login";
 		SoapObject request = new SoapObject(NAMESPACE, Metodo);
 
 		request.addProperty(crearPropiedad("dni", dni, String.class));
