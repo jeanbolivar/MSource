@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.widget.Toast;
 
 import com.magneticsource.msource.R;
+import com.magneticsource.msource.conexion.LoginCliente;
 import com.magneticsource.msource.conexion.UsuarioCliente;
 
 /**
@@ -34,8 +35,7 @@ public class IniciarSesionTask extends AsyncTask<String, Void, Boolean> {
 
     @Override
     protected Boolean doInBackground(String... params) {
-        //return UsuarioCliente.verificarDatos(dni, clave);
-        return true;
+        return LoginCliente.verificarDatos(dni, clave);
     }
 
     @Override
