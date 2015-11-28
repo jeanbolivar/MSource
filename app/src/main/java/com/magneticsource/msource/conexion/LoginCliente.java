@@ -35,18 +35,6 @@ public class LoginCliente extends ServicioWebCliente {
 
         Log.e("Imprimir",s);
 
-		JSONParser parser = new JSONParser();
-		Object obj = null;
-        Boolean b = null;
-		try {
-			obj = parser.parse(s);
-			JSONArray array = (JSONArray)obj;
-            b = (Boolean)array.get(0);
-
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-
-		return b;
+		return s.equals("true");
 	}
 }
