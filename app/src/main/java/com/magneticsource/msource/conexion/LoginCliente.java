@@ -23,7 +23,7 @@ import org.ksoap2.serialization.SoapObject;
  *
  */
 public class LoginCliente extends ServicioWebCliente {
-	private static String URL = HOST + "/Login.php?wsdl";
+	private static String URL = HOST + "Login.php?wsdl";
 
 	public static Boolean verificarDatos(String dni, String clave) {
 		String Metodo = "login";
