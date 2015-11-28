@@ -27,9 +27,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         Conexion c = new Conexion(getBaseContext());
-        /*if(!c.verificarAdaptadorNFC()){
+        if(!c.verificarAdaptadorNFC()){
             finish();
-        } else {*/
+        } else {
 
             if (Login.SesionActiva(getBaseContext())) {
                 if (Login.TipoUsuario(getBaseContext()).equals(Datos.TIPO_ALUMNO)) {
@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
                 });
             }
-        //}
+        }
 
     }
 
