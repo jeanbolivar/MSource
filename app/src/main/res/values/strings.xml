@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">MSource</string>
+    
+    <!-- Strings related to login -->
+    <string name="prompt_dni">Usuario:</string>
+    <string name="prompt_password">Contraseña:</string>
+    <string name="prompt_login">Entrar</string>
+    <string name="title_activity_main">Iniciar Sesión</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_profesor">Profesor</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="bienvenido">Bienvenido</string>
+    <string name="prompt_bienvenido">Bienvenido</string>
+    <string name="prompt_inciarAsistencia">Iniciar Asistencia</string>
+    <string name="title_activity_capturar">CapturarActivity</string>
+    <string name="prompt_registro_iniciado">El registro de asistencia a comenzado</string>
+    <string name="prompt_curso">Curso:</string>
+    <string name="prompt_grupo">Grupo:</string>
+    <string name="title_activity_alumno">AlumnoActivity</string>
+    <string name="prompt_nfc_aviso">Acerque su dispositivo al dispositvio del maestro para registrar su asistencia</string>
+
+    <string name="mensaje_espere">Espere por favor...</string>
+    <string name="mensaje_inciando_sesion">Iniciando Sesión</string>
+    <string name="mensaje_obtener_datos">Obteniendo Información</string>
+
+    <string name="error_internet">No se pudo conectar a Internet</string>
+    <string name="error_adaptador_nfc">No cuenta con NFC</string>
+    <string name="error_service">No se pudo conectar, intente despues</string>
+    <string name="error_dni">El Usuario ingresado no es correcto</string>
+    <string name="error_clave">La clave ingresada no es correcta</string>
+    <string name="error_dni_clave">El usuario o la clave ingresados son incorrectos</string>
+    <string name="error_sesion">Usuario o contraseña erronea</string>
+</resources>
+
