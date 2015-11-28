@@ -1,6 +1,7 @@
 package com.magneticsource.msource.conexion;
 
 import android.content.Intent;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.magneticsource.msource.R;
@@ -31,6 +32,8 @@ public class LoginCliente extends ServicioWebCliente {
 		request.addProperty(crearPropiedad("dni", dni, String.class));
 		request.addProperty(crearPropiedad("clave", clave, String.class));
 		String s = getString(Metodo, request, URL);
+
+        Log.e("Imprimir",s);
 
 		JSONParser parser = new JSONParser();
 		Object obj = null;
