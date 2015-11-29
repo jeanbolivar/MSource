@@ -2,60 +2,60 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\Emanuel\AndroidStudioProjects\MSource\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="ddde541c289c8b816a8f8fd6c325d80788c522a6">
-        <dex dex="C:\Users\Emanuel\AndroidStudioProjects\MSource\app\build\intermediates\pre-dexed\debug\classes-ca7f414f7b0dc0c18f34fffe32954f5b387465fe.jar" />
-    </item>
-    <item
-        jar="C:\Users\Emanuel\AndroidStudioProjects\MSource\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\23.1.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="3f151e49c316a5ab2c065969a3b3b55ef9b393fc">
-        <dex dex="C:\Users\Emanuel\AndroidStudioProjects\MSource\app\build\intermediates\pre-dexed\debug\classes-7a893e99e64d3e4cc22383f4aade8c065df96c3d.jar" />
-    </item>
-    <item
-        jar="C:\Users\Emanuel\AndroidStudioProjects\MSource\app\libs\json_simple-1.1.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="5e303a03d04e6788dddfa3655272580ae0fc13bb">
-        <dex dex="C:\Users\Emanuel\AndroidStudioProjects\MSource\app\build\intermediates\pre-dexed\debug\json_simple-1.1-75c6da99fd106b0b4e6cea339f3798f6622a5a54.jar" />
-    </item>
-    <item
-        jar="C:\Users\Emanuel\AndroidStudioProjects\MSource\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.1.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="57ae0d750ff83f0c738d21720224ac7ea866a094">
-        <dex dex="C:\Users\Emanuel\AndroidStudioProjects\MSource\app\build\intermediates\pre-dexed\debug\classes-3b6627c203d6f21d079df385a533a92c2313d10e.jar" />
-    </item>
-    <item
-        jar="C:\Users\Emanuel\AndroidStudioProjects\MSource\app\libs\ksoap2-android-assembly-2.4-jar-with-dependencies.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="e8796346a9191a019e936210a2dc50662c57594b">
-        <dex dex="C:\Users\Emanuel\AndroidStudioProjects\MSource\app\build\intermediates\pre-dexed\debug\ksoap2-android-assembly-2.4-jar-with-dependencies-6da04afd86e550b98662958117d23ccb625b3e6a.jar" />
-    </item>
-    <item
-        jar="C:\Users\Emanuel\AppData\Local\Android\sdk1\extras\android\m2repository\com\android\support\support-annotations\23.1.0\support-annotations-23.1.0.jar"
+        jar="/home/tony/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/23.1.0/support-annotations-23.1.0.jar"
         jumboMode="false"
         revision="23.0.1"
         sha1="92e3fc113ec3ee36b64603a38857b95700025633">
-        <dex dex="C:\Users\Emanuel\AndroidStudioProjects\MSource\app\build\intermediates\pre-dexed\debug\support-annotations-23.1.0-02162541545fac871552acfff92caf0eccd46173.jar" />
+        <dex dex="/home/tony/AndroidStudioProjects/MSource/app/build/intermediates/pre-dexed/debug/support-annotations-23.1.0-69edf5c4ceba7ac6dd4ffb3959d8ce43a125c163.jar" />
     </item>
     <item
-        jar="C:\Users\Emanuel\AndroidStudioProjects\MSource\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.0\jars\libs\internal_impl-23.1.0.jar"
+        jar="/home/tony/AndroidStudioProjects/MSource/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="ddde541c289c8b816a8f8fd6c325d80788c522a6">
+        <dex dex="/home/tony/AndroidStudioProjects/MSource/app/build/intermediates/pre-dexed/debug/classes-4f3a3be3eab2617efb8b91f71da6cd9a7078992f.jar" />
+    </item>
+    <item
+        jar="/home/tony/AndroidStudioProjects/MSource/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.1.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="3f151e49c316a5ab2c065969a3b3b55ef9b393fc">
+        <dex dex="/home/tony/AndroidStudioProjects/MSource/app/build/intermediates/pre-dexed/debug/classes-cf179943941b3a25afed04408e3b4c4f5d27e46c.jar" />
+    </item>
+    <item
+        jar="/home/tony/AndroidStudioProjects/MSource/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.1.0/jars/libs/internal_impl-23.1.0.jar"
         jumboMode="false"
         revision="23.0.1"
         sha1="8716243bf04bae8d6c9ca94d27b9a9be7236f0a3">
-        <dex dex="C:\Users\Emanuel\AndroidStudioProjects\MSource\app\build\intermediates\pre-dexed\debug\internal_impl-23.1.0-f71e0a40ccca7cffe17dff31871f3fa073ef2af5.jar" />
+        <dex dex="/home/tony/AndroidStudioProjects/MSource/app/build/intermediates/pre-dexed/debug/internal_impl-23.1.0-c127cb42520b81b325ecf76ece66141914c74793.jar" />
     </item>
     <item
-        jar="C:\Users\Emanuel\AndroidStudioProjects\MSource\app\build\intermediates\exploded-aar\com.android.support\design\23.1.0\jars\classes.jar"
+        jar="/home/tony/AndroidStudioProjects/MSource/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="57ae0d750ff83f0c738d21720224ac7ea866a094">
+        <dex dex="/home/tony/AndroidStudioProjects/MSource/app/build/intermediates/pre-dexed/debug/classes-fc9c7c9414a67308bb52b72f6e242587e5a2a025.jar" />
+    </item>
+    <item
+        jar="/home/tony/AndroidStudioProjects/MSource/app/libs/json_simple-1.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="5e303a03d04e6788dddfa3655272580ae0fc13bb">
+        <dex dex="/home/tony/AndroidStudioProjects/MSource/app/build/intermediates/pre-dexed/debug/json_simple-1.1-c5db9b1b1bc4953668d4621d810a09703bbd825a.jar" />
+    </item>
+    <item
+        jar="/home/tony/AndroidStudioProjects/MSource/app/build/intermediates/exploded-aar/com.android.support/design/23.1.0/jars/classes.jar"
         jumboMode="false"
         revision="23.0.1"
         sha1="19026d31f5d3ae868db81319671a642be5fbba08">
-        <dex dex="C:\Users\Emanuel\AndroidStudioProjects\MSource\app\build\intermediates\pre-dexed\debug\classes-f18d4342b2e4b2d86507f6635c9c72a9d9d22a92.jar" />
+        <dex dex="/home/tony/AndroidStudioProjects/MSource/app/build/intermediates/pre-dexed/debug/classes-cf8e8ce7d88c03e1afe865e8841bd0ad2bb8508d.jar" />
+    </item>
+    <item
+        jar="/home/tony/AndroidStudioProjects/MSource/app/libs/ksoap2-android-assembly-2.4-jar-with-dependencies.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="e8796346a9191a019e936210a2dc50662c57594b">
+        <dex dex="/home/tony/AndroidStudioProjects/MSource/app/build/intermediates/pre-dexed/debug/ksoap2-android-assembly-2.4-jar-with-dependencies-27dfbfc2f33767c34fd40a21670ab47b6f647943.jar" />
     </item>
 
 </items>

@@ -12,7 +12,9 @@ import com.magneticsource.msource.control.Profesor;
 import com.magneticsource.msource.ui.AlumnoActivity;
 import com.magneticsource.msource.ui.ProfesorActivity;
 
+import org.json.JSONObject;
 import org.json.simple.JSONArray;
+import org.json.simple.JSONValue;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.ksoap2.serialization.SoapObject;
@@ -23,7 +25,7 @@ import org.ksoap2.serialization.SoapObject;
  *
  */
 public class LoginCliente extends ServicioWebCliente {
-	private static String URL = HOST + "Login.php?wsdl";
+	private static String URL = HOST + "/Login.php?wsdl";
 
 	public static Boolean verificarDatos(String dni, String clave) {
 		String Metodo = "login";
@@ -31,9 +33,8 @@ public class LoginCliente extends ServicioWebCliente {
 
 		request.addProperty(crearPropiedad("dni", dni, String.class));
 		request.addProperty(crearPropiedad("clave", clave, String.class));
-		String s = getString(Metodo, request, URL);
-
-        Log.e("Imprimir",s);
+		String s = getString(Metodo,request,URL);
+		//s=s==null?"":s;
 
 		return s.equals("true");
 	}
