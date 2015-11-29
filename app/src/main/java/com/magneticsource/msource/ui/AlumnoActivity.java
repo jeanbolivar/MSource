@@ -20,12 +20,15 @@ import android.nfc.NfcEvent;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.nio.charset.Charset;
+import java.util.Locale;
 
-public class AlumnoActivity extends AppCompatActivity implements
-        CreateNdefMessageCallback{
 
+public class AlumnoActivity extends AppCompatActivity {
+    private NfcAdapter mNfcAdapter;
     private TextView txvAlumno;
     private Alumno alumno;
+    private NdefMessage mNdefMessage;
 
     EditText textOut;
 
@@ -41,9 +44,44 @@ public class AlumnoActivity extends AppCompatActivity implements
 
         txvAlumno.setText(alumno.getNombreCompleto());
 
-        /*NfcAdapter adpater = NfcAdapter.getDefaultAdapter(this);
-        adpater.setNdefPushMessageCallback(this,this);
-        //adpater.setOnNdefPushCompleteCallback(this,this);*/
+        mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
+
+        mNdefMessage = new NdefMessage(
+                new NdefRecord[] {
+                        createNewTextRecord(alumno.getDni(), Locale.ENGLISH, true)});
+    }
+
+    public static NdefRecord createNewTextRecord(String text, Locale locale, boolean encodeInUtf8) {
+        byte[] langBytes = locale.getLanguage().getBytes(Charset.forName("US-ASCII"));
+
+        Charset utfEncoding = encodeInUtf8 ? Charset.forName("UTF-8") : Charset.forName("UTF-16");
+        byte[] textBytes = text.getBytes(utfEncoding);
+
+        int utfBit = encodeInUtf8 ? 0 : (1 << 7);
+        char status = (char)(utfBit + langBytes.length);
+
+        byte[] data = new byte[1 + langBytes.length + textBytes.length];
+        data[0] = (byte)status;
+        System.arraycopy(langBytes, 0, data, 1, langBytes.length);
+        System.arraycopy(textBytes, 0, data, 1 + langBytes.length, textBytes.length);
+
+        return new NdefRecord(NdefRecord.TNF_WELL_KNOWN, NdefRecord.RTD_TEXT, new byte[0], data);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if (mNfcAdapter != null)
+            mNfcAdapter.enableForegroundNdefPush(this, mNdefMessage);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        if (mNfcAdapter != null)
+            mNfcAdapter.disableForegroundNdefPush(this);
     }
 
     @Override
@@ -66,45 +104,5 @@ public class AlumnoActivity extends AppCompatActivity implements
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    /*@Override
-    public void onNdefPushComplete(NfcEvent event) {
-
-        final String eventString = "onNdefPushComplete\n" + event.toString();
-        runOnUiThread(new Runnable() {
-
-            @Override
-            public void run() {
-                Toast.makeText(getApplicationContext(),
-                        eventString,
-                        Toast.LENGTH_LONG).show();
-            }
-        });
-
-    }*/
-
-    @Override
-    public NdefMessage createNdefMessage(NfcEvent event) {
-
-        String text = ("Beam up" + "Beam time: " + System.currentTimeMillis());
-        NdefMessage msg= new NdefMessage(
-                new NdefRecord[] { NdefRecord.createMime(
-                        "text/plain", text.getBytes()
-                )}
-        );
-        return msg;
-
-        /*String stringOut = textOut.getText().toString();
-        byte[] bytesOut = stringOut.getBytes();
-
-        NdefRecord ndefRecordOut = new NdefRecord(
-                NdefRecord.TNF_MIME_MEDIA,
-                "text/plain".getBytes(),
-                new byte[] {},
-                bytesOut);
-
-        NdefMessage ndefMessageout = new NdefMessage(ndefRecordOut);
-        return ndefMessageout;*/
     }
 }
