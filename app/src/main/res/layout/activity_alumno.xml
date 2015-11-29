@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:id="@+id/relativeLayout">
+        android:id="@+id/ala_rlyMain">
 
         <TextView
             android:layout_width="wrap_content"
@@ -45,7 +45,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/prompt_nfc_aviso"
         android:id="@+id/ala_txvInformacion"
-        android:layout_below="@+id/relativeLayout"
+        android:layout_below="@+id/ala_rlyMain"
         android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

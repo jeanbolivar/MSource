@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.magneticsource.msource.control.Alumno;
@@ -27,6 +28,7 @@ import java.util.Locale;
 public class AlumnoActivity extends AppCompatActivity {
     private NfcAdapter mNfcAdapter;
     private TextView txvAlumno;
+    private ImageView img;
     private Alumno alumno;
     private NdefMessage mNdefMessage;
 
@@ -38,11 +40,18 @@ public class AlumnoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_alumno);
 
         txvAlumno = (TextView) findViewById(R.id.ala_txvAlumno);
+        img =(ImageView) findViewById(R.id.ala_imvFoto);
 
         Datos d =new Datos(getApplicationContext());
         alumno = Alumno.fromString(d.getString(Datos.USUARIO));
 
         txvAlumno.setText(alumno.getNombreCompleto());
+
+        if (alumno.getImageURL().length()>0) {
+            ImageLoadTask load = new ImageLoadTask(alumno.getImageURL(),
+                    img);
+            load.execute();
+        }
 
         mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
 

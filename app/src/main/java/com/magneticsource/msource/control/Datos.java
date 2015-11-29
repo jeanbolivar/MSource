@@ -12,6 +12,7 @@ public class Datos {
     public static final String TIPO_ALUMNO = "alumno";
     public static final String TIPO_PROFESOR = "profesor";
     public static final String USUARIO = "Usuario";
+    public static final String ASISTENCIA = "Asistencia";
     public static String SEPARADOR1 = "█";
     private Context context;
     private SharedPreferences preferences;

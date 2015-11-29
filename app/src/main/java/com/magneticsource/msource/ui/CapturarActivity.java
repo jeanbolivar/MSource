@@ -11,6 +11,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.magneticsource.msource.R;
+import com.magneticsource.msource.asistencia.Asistencia;
+import com.magneticsource.msource.control.Datos;
+import com.magneticsource.msource.control.Profesor;
 
 import android.content.Intent;
 import android.nfc.NdefMessage;
@@ -27,23 +30,48 @@ import java.util.Arrays;
 
 public class CapturarActivity extends AppCompatActivity {
 
-    TextView textInfo;
+    private Profesor profesor;
     private NfcAdapter nfcAdapter;
     private PendingIntent mPendingIntent;
     private IntentFilter[] mIntentFilters;
     private String[][] mNFCTechLists;
+    private TextView txvNombreCurso;
+    private TextView txvNombreGrupo;
+    private TextView txvHora;
+    private TextView txvAula;
+    private Asistencia asistencia;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_capturar);
 
-        textInfo = (TextView)findViewById(R.id.info);
+        Intent intent = getIntent();
 
+        asistencia = (Asistencia) (intent.getParcelableExtra(Datos.ASISTENCIA));
+        if(asistencia ==null){
+            Toast.makeText(this, R.string.error_curso, Toast.LENGTH_LONG);
+            finish();
+        } else {
+            txvNombreCurso = (TextView) findViewById(R.id.caa_txvCurso);
+            txvNombreGrupo = (TextView) findViewById(R.id.caa_txvGrupo);
+            txvHora = (TextView) findViewById(R.id.caa_txvInicioFin);
+            txvAula = (TextView) findViewById(R.id.caa_txvAula);
+
+            txvHora.setText(asistencia.getHoraInicio() + " - " + asistencia.getHoraFin());
+            txvNombreCurso.setText(asistencia.getNombreCurso());
+            txvNombreGrupo.setText(asistencia.getNombreGrupo());
+            txvAula.setText(asistencia.getNombreAula());
+
+            loadIntentFilter();
+        }
+    }
+
+    private void loadIntentFilter() {
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
-        if(nfcAdapter==null){
+        if (nfcAdapter == null) {
             Toast.makeText(CapturarActivity.this,
-                    "no NFC adapter exists",
+                    R.string.error_adaptador_nfc,
                     Toast.LENGTH_LONG).show();
             finish();
         }
@@ -56,12 +84,12 @@ public class CapturarActivity extends AppCompatActivity {
         IntentFilter ndefIntent = new IntentFilter(NfcAdapter.ACTION_NDEF_DISCOVERED);
         try {
             ndefIntent.addDataType("*/*");
-            mIntentFilters = new IntentFilter[] { ndefIntent };
+            mIntentFilters = new IntentFilter[]{ndefIntent};
         } catch (Exception e) {
-            Log.e("TagDispatch", e.toString());
+            e.printStackTrace();
         }
 
-        mNFCTechLists = new String[][] { new String[] { NfcF.class.getName() } };
+        mNFCTechLists = new String[][]{new String[]{NfcF.class.getName()}};
     }
 
     @Override

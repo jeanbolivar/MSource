@@ -57,35 +57,29 @@ public class ObtenerInformacionTask extends AsyncTask<String, Void, String> {
         if(informacion ==null){
             Toast.makeText(context, R.string.error_service, Toast.LENGTH_SHORT).show();
         } else {
-            JSONParser parser = new JSONParser();
-            Object obj = null;
-            try {
-                obj = parser.parse(informacion);
-                JSONArray array = (JSONArray)obj;
-                String tipo = array.remove(5).toString();
-                array.add(clave);
-
-                informacion =array.toJSONString();
-                Datos datos =new Datos(context);
-                datos.putString(Datos.TIPO_USUARIO, tipo);
-                datos.putString(Datos.USUARIO,informacion);
-                Intent i =null;
-                Persona p=null;
-                if(tipo.equals(Datos.TIPO_ALUMNO)){
-                    i=new Intent(context, AlumnoActivity.class);
-                    p = Alumno.fromString(informacion);
-                    context.startActivity(i);
-                } else if(tipo.equals(Datos.TIPO_PROFESOR)) {
-                    i = new Intent(context, ProfesorActivity.class);
-                    p = Profesor.fromString(informacion);
-                    context.startActivity(i);
-                }
-
-
-                Toast.makeText(context, context.getString(R.string.bienvenido) +" "+ p.getNombres(),Toast.LENGTH_SHORT).show();
-            } catch (ParseException e) {
-                e.printStackTrace();
+            String[] info = informacion.split(Datos.SEPARADOR1);
+            String tipo = info[5];
+            informacion = "";
+            for(int i=0;i<5;i++){
+                informacion += info[i] + Datos.SEPARADOR1;
             }
+            informacion += clave;
+
+            Datos datos =new Datos(context);
+            datos.putString(Datos.TIPO_USUARIO, tipo);
+            datos.putString(Datos.USUARIO,informacion);
+
+            Intent i =null;
+            Persona p=null;
+            if(tipo.equals(Datos.TIPO_ALUMNO)){
+                i=new Intent(context, AlumnoActivity.class);
+                p = Alumno.fromString(informacion);
+            } else if(tipo.equals(Datos.TIPO_PROFESOR)) {
+                i = new Intent(context, ProfesorActivity.class);
+                p = Profesor.fromString(informacion);
+            }
+            context.startActivity(i);
+            Toast.makeText(context, context.getString(R.string.prompt_bienvenido) +" "+ p.getNombres(),Toast.LENGTH_SHORT).show();
 
         }
         dialog.dismiss();

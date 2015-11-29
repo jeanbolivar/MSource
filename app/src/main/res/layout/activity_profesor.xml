@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="@string/prompt_bienvenido"
-            android:id="@+id/ala_txvBienvenido"
+            android:id="@+id/pra_txvBienvenido"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true" />
 
@@ -25,16 +25,23 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="@string/prompt_dni"
-            android:id="@+id/ala_txvAlumno"
-            android:layout_below="@+id/ala_txvBienvenido"
+            android:id="@+id/pra_txvProfesor"
+            android:layout_below="@id/pra_txvBienvenido"
             android:layout_centerHorizontal="true" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/pra_imvFoto"
+            android:src="@drawable/share"
+            android:layout_below="@id/pra_txvProfesor"/>
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/prompt_inciarAsistencia"
-            android:id="@+id/button2"
-            android:layout_below="@+id/ala_txvAlumno"
+            android:id="@+id/pra_btnCapturar"
+            android:layout_below="@id/pra_imvFoto"
             android:layout_centerHorizontal="true" />
 
     </RelativeLayout>
