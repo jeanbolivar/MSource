@@ -21,8 +21,7 @@ public class Conexion {
 	public boolean verificarConexionInternet() {
 		wifiConexion = this.verificarWifiConexion();
 		mobilConexion = this.verificarMobilConexion();
-		//return wifiConexion || mobilConexion;
-		return  true;
+		return wifiConexion || mobilConexion;
 	}
 
 	private boolean verificarWifiConexion() {
