@@ -34,8 +34,7 @@ public class LoginCliente extends ServicioWebCliente {
 		request.addProperty(crearPropiedad("dni", dni, String.class));
 		request.addProperty(crearPropiedad("clave", clave, String.class));
 		String s = getString(Metodo,request,URL);
-		//s=s==null?"":s;
-
+		s=s==null?"false":s;
 		return s.equals("true");
 	}
 }

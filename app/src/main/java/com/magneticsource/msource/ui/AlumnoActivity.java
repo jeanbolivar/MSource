@@ -57,7 +57,7 @@ public class AlumnoActivity extends AppCompatActivity {
 
         mNdefMessage = new NdefMessage(
                 new NdefRecord[] {
-                        createNewTextRecord(alumno.getDni(), Locale.ENGLISH, true)});
+                        createNewTextRecord(alumno.getDni()+Datos.SEPARADOR1+alumno.getNombreCompleto(), Locale.ENGLISH, true)});
     }
 
     public static NdefRecord createNewTextRecord(String text, Locale locale, boolean encodeInUtf8) {

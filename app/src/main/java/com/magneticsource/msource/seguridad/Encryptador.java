@@ -5,7 +5,6 @@ package com.magneticsource.msource.seguridad;
  */
 public class Encryptador {
     public static String Encriptar(String palabra){
-
         return palabra;
     }
 

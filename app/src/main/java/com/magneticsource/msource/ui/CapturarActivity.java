@@ -12,6 +12,7 @@ import android.view.MenuItem;
 
 import com.magneticsource.msource.R;
 import com.magneticsource.msource.asistencia.Asistencia;
+import com.magneticsource.msource.asistencia.ManejadorEnvioAsistencia;
 import com.magneticsource.msource.control.Datos;
 import com.magneticsource.msource.control.Profesor;
 
@@ -21,16 +22,20 @@ import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
 import android.nfc.NfcEvent;
 import android.os.Parcelable;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 
 public class CapturarActivity extends AppCompatActivity {
 
     private Profesor profesor;
+    private ArrayList<String> dni_alumnos;
     private NfcAdapter nfcAdapter;
     private PendingIntent mPendingIntent;
     private IntentFilter[] mIntentFilters;
@@ -39,6 +44,7 @@ public class CapturarActivity extends AppCompatActivity {
     private TextView txvNombreGrupo;
     private TextView txvHora;
     private TextView txvAula;
+    private Button btnTerminar;
     private Asistencia asistencia;
 
     @Override
@@ -49,10 +55,11 @@ public class CapturarActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         asistencia = (Asistencia) (intent.getParcelableExtra(Datos.ASISTENCIA));
-        if(asistencia ==null){
+        if(asistencia==null){
             Toast.makeText(this, R.string.error_curso, Toast.LENGTH_LONG);
             finish();
         } else {
+            btnTerminar =(Button) findViewById(R.id.caa_btnTerminarCaptura);
             txvNombreCurso = (TextView) findViewById(R.id.caa_txvCurso);
             txvNombreGrupo = (TextView) findViewById(R.id.caa_txvGrupo);
             txvHora = (TextView) findViewById(R.id.caa_txvInicioFin);
@@ -63,7 +70,30 @@ public class CapturarActivity extends AppCompatActivity {
             txvNombreGrupo.setText(asistencia.getNombreGrupo());
             txvAula.setText(asistencia.getNombreAula());
 
+            Datos d  =new Datos(getBaseContext());
+            profesor = Profesor.fromString(d.getString(Datos.USUARIO));
+            dni_alumnos=new ArrayList<String>();
+
             loadIntentFilter();
+
+            btnTerminar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    Intent i = new Intent(getBaseContext(), ManejadorEnvioAsistencia.class);
+                    i.putExtra(Datos.USUARIO, profesor.getDni());
+                    i.putExtra("clave", profesor.getClave());
+                    if(dni_alumnos.size()>0) {
+                        String[] asistentes = new String[dni_alumnos.size()];
+                        for (int j = 0; j < asistentes.length; j++) {
+                            asistentes[j] = dni_alumnos.get(j);
+                        }
+                        i.putExtra(Datos.ASISTENTES, asistentes);
+                    }
+                    startService(i);
+                    finish();
+                }
+            });
         }
     }
 
@@ -142,7 +172,16 @@ public class CapturarActivity extends AppCompatActivity {
             }
         }
 
-        Toast.makeText(this, s,Toast.LENGTH_LONG).show();
+        Toast.makeText(this, s.split(Datos.SEPARADOR1)[1],Toast.LENGTH_LONG).show();
+        if(!tieneRepetido(s))
+            dni_alumnos.add(s);
+    }
+
+    public boolean tieneRepetido(String dni){
+        for(String s : dni_alumnos)
+            if(dni.equals(dni))
+                return true;
+        return false;
     }
 
     @Override

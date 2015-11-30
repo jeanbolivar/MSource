@@ -17,20 +17,9 @@ public class Alumno extends Persona{
     }
 
     public static Alumno fromString(String informacion){
-        JSONParser parser = new JSONParser();
-        try {
-            Object obj = parser.parse(informacion);
-            JSONArray array = (JSONArray)obj;
-            if (array.size() == 6) {
-                return new Alumno(array.get(0).toString(),
-                        array.get(1).toString(),
-                        array.get(2).toString(),
-                        array.get(3).toString(),
-                        array.get(4).toString(),
-                        array.get(5).toString());
-            }
-        } catch (ParseException e) {
-            e.printStackTrace();
+        String[] info = informacion.split(Datos.SEPARADOR1);
+        if(info.length==6){
+            return new Alumno(info[0],info[1],info[2],info[3],info[4],info[5]);
         }
         return null;
     }

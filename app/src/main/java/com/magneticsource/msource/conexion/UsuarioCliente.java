@@ -31,9 +31,9 @@ public class UsuarioCliente extends ServicioWebCliente {
 			obj = parser.parse(s);
 			JSONArray array = (JSONArray) obj;
             for(Object o : array) {
-                result=o.toString()+ Datos.SEPARADOR1;
+                result+=o.toString()+ Datos.SEPARADOR1;
             }
-            result = result.substring(0,result.length()-2);
+            result = result.substring(0,result.length()-1);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}

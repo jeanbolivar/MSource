@@ -64,6 +64,7 @@ public class ObtenerInformacionTask extends AsyncTask<String, Void, String> {
                 informacion += info[i] + Datos.SEPARADOR1;
             }
             informacion += clave;
+            Log.e("error",informacion);
 
             Datos datos =new Datos(context);
             datos.putString(Datos.TIPO_USUARIO, tipo);

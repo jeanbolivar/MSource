@@ -17,7 +17,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/caa_txcHora"
             android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:textSize="@dimen/abc_dialog_padding_top_material" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -89,5 +90,13 @@
         android:text="New Text"
         android:id="@+id/caa_txvInicioFin"
         android:layout_below="@+id/relativeLayout"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/prompt_terminarAsistencia"
+        android:id="@+id/caa_btnTerminarCaptura"
+        android:layout_below="@+id/caa_txvInicioFin"
         android:layout_centerHorizontal="true" />
 </RelativeLayout>

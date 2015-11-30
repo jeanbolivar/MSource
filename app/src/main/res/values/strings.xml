@@ -12,6 +12,7 @@
     <string name="prompt_login">Entrar</string>
     <string name="prompt_bienvenido">Bienvenido</string>
     <string name="prompt_inciarAsistencia">Iniciar Asistencia</string>
+    <string name="prompt_terminarAsistencia">Terminar Asistencia</string>
     <string name="prompt_registro_iniciado">El registro de asistencia a comenzado</string>
     <string name="prompt_curso">Curso:</string>
     <string name="prompt_grupo">Grupo:</string>
@@ -31,5 +32,6 @@
     <string name="error_dni_clave">El usuario o la clave ingresados son incorrectos</string>
     <string name="error_sesion">Usuario o contraseña erronea</string>
     <string name="error_curso">No tiene un curso que dictar en estos momentos</string>
+    <string name="mensaje_asistenciaTomada">Se grabo la asistencia</string>
 </resources>
 
