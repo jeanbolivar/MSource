@@ -83,6 +83,8 @@ public class CapturarActivity extends AppCompatActivity {
                     Intent i = new Intent(getBaseContext(), ManejadorEnvioAsistencia.class);
                     i.putExtra(Datos.USUARIO, profesor.getDni());
                     i.putExtra("clave", profesor.getClave());
+                    i.putExtra("id_grupo", asistencia.getIdGrupo());
+
                     if(dni_alumnos.size()>0) {
                         String[] asistentes = new String[dni_alumnos.size()];
                         for (int j = 0; j < asistentes.length; j++) {
@@ -179,7 +181,7 @@ public class CapturarActivity extends AppCompatActivity {
 
     public boolean tieneRepetido(String dni){
         for(String s : dni_alumnos)
-            if(dni.equals(dni))
+            if(dni.equals(s))
                 return true;
         return false;
     }

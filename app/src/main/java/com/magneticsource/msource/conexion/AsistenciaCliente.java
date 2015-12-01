@@ -1,5 +1,7 @@
 package com.magneticsource.msource.conexion;
 
+import android.util.Log;
+
 import com.magneticsource.msource.asistencia.Asistencia;
 import com.magneticsource.msource.control.Datos;
 
@@ -27,7 +29,6 @@ public class AsistenciaCliente extends ServicioWebCliente {
 		request.addProperty(crearPropiedad("dni_docente", dni_docente, String.class));
 		request.addProperty(crearPropiedad("clave", clave, String.class));
         String s = getString(Metodo, request, URL);
-
         String result="";
         Asistencia asistencia = null;
 		JSONParser parser = new JSONParser();
@@ -50,7 +51,7 @@ public class AsistenciaCliente extends ServicioWebCliente {
 		return asistencia;
 	}
 
-	public static boolean setAsistencia(String dni_docente, String clave_docente, String[] dni_alumnos, String token, String hora) {
+	public static boolean setAsistencia(String dni_docente, String clave_docente, String[] dni_alumnos, String token, String hora, String id_grupo) {
 		String Metodo = "setAsistencia";
 		SoapObject request = new SoapObject(NAMESPACE, Metodo);
         LinkedList list = new LinkedList();
@@ -64,6 +65,7 @@ public class AsistenciaCliente extends ServicioWebCliente {
 		request.addProperty(crearPropiedad("dni_alumnos", jsonAlumnos, String.class));
 		request.addProperty(crearPropiedad("token", token, String.class));
 		request.addProperty(crearPropiedad("hora", hora, String.class));
+		request.addProperty(crearPropiedad("id_grupo", id_grupo, String.class));
         String s = getString(Metodo, request, URL);
 		return s.equals("true");
 	}

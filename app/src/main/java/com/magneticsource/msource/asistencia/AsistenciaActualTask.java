@@ -47,13 +47,15 @@ public class AsistenciaActualTask extends AsyncTask<String, Void, Asistencia> {
         super.onPostExecute(asistencia);
         if(asistencia==null){
             Toast.makeText(context, R.string.error_curso ,Toast.LENGTH_LONG).show();
-            dialog.dismiss();
+            if(dialog!=null)
+                dialog.dismiss();
         } else{
             Intent i = new Intent(context, CapturarActivity.class);
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             i.putExtra(Datos.ASISTENCIA, asistencia);
             context.startActivity(i);
-            dialog.dismiss();
+            if(dialog!=null)
+                dialog.dismiss();
         }
 
     }

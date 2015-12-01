@@ -30,6 +30,7 @@ public class ManejadorEnvioAsistencia extends Service{
 
     private boolean termino  = false;
     private String dni_docente;
+    private String id_grupo;
     private String clave;
     private String[] alumnos_dni;
     private String[] alumnos_nombres;
@@ -43,6 +44,8 @@ public class ManejadorEnvioAsistencia extends Service{
     public int onStartCommand(Intent intent, int flags, int startId) {
         dni_docente = intent.getStringExtra(Datos.USUARIO);
         clave = intent.getStringExtra("clave");
+        id_grupo = intent.getStringExtra("id_grupo");
+
         String[] asistentes = intent.getStringArrayExtra(Datos.ASISTENTES);
         if(asistentes==null){
             asistentes = alumnos_dni = alumnos_nombres = new String[0];
@@ -57,6 +60,7 @@ public class ManejadorEnvioAsistencia extends Service{
         }
 
         hora = new SimpleDateFormat("HH:mm:ss").format(new Date());
+        Log.e(hora,hora);
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -65,18 +69,18 @@ public class ManejadorEnvioAsistencia extends Service{
                 while (!termino){
                     Conexion c =new Conexion(getBaseContext());
                     if(c.verificarConexionInternet()){
-                        if(AsistenciaCliente.setAsistencia(dni_docente, clave, alumnos_dni, Encryptador.Encriptar(hora),hora)){
-                            termino = true;
-                            NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-                            Intent intent = new Intent(getBaseContext(), MainActivity.class);
-
-                            PendingIntent pendingIntent = PendingIntent.getActivity(getBaseContext(), 1, intent, 0);
-
-                            Notification.Builder builder = new Notification.Builder(getBaseContext());
+                        if(AsistenciaCliente.setAsistencia(dni_docente, clave, alumnos_dni, Encryptador.Encriptar(hora),hora,id_grupo)){
                             int cantidad = alumnos_dni.length;
                             String cantidadAlumnos = cantidad+" alumno"+ (cantidad==1?"":"");
                             String ticker= getString(R.string.mensaje_asistenciaTomada) + " para "+ cantidadAlumnos;
                             String subtext = "Se tomó la asistencia a "+cantidadAlumnos;
+
+                            NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+                            Intent intent = new Intent(getBaseContext(), MainActivity.class);
+
+                            PendingIntent pendingIntent = PendingIntent.getActivity(getBaseContext(), 1, intent, 0);
+                            Notification.Builder builder = new Notification.Builder(getBaseContext());
+
                             if(alumnos_nombres.length>0) {
                                 String detalle = "";
                                 for (String nombre :
@@ -93,7 +97,7 @@ public class ManejadorEnvioAsistencia extends Service{
                             builder.setContentText(getString(R.string.mensaje_asistenciaTomada));
                             builder.setSmallIcon(R.drawable.share);
                             builder.setContentIntent(pendingIntent);
-                            builder.setOngoing(true);
+                            builder.setOngoing(false);
                             builder.setSubText(subtext);   //API level 16
                             builder.setNumber(100);
                             builder.build();
@@ -101,6 +105,26 @@ public class ManejadorEnvioAsistencia extends Service{
                             Notification myNotication = builder.getNotification();
                             manager.notify(11, myNotication);
                         }
+                        else {
+                            NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+                            Intent intent = new Intent(getBaseContext(), MainActivity.class);
+
+                            PendingIntent pendingIntent = PendingIntent.getActivity(getBaseContext(), 1, intent, 0);
+                            Notification.Builder builder = new Notification.Builder(getBaseContext());
+
+                            builder.setAutoCancel(true);
+                            builder.setTicker("No se pudo guardar");
+                            builder.setContentTitle(getString(R.string.app_name));
+                            builder.setContentText("Algo paso con el servicio");
+                            builder.setSmallIcon(R.drawable.share);
+                            builder.setContentIntent(pendingIntent);
+                            builder.setOngoing(false);
+                            builder.setNumber(100);
+                            builder.build();
+
+                            Notification myNotication = builder.getNotification();
+                            manager.notify(11, myNotication);
+                        } termino = true;
                     } else {
                         try {
                             Thread.sleep(1000*60);
@@ -110,8 +134,6 @@ public class ManejadorEnvioAsistencia extends Service{
                     }
 
                 }
-
-                //Stop service once it finishes its task
                 stopSelf();
             }
         }).start();
