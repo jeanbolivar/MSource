@@ -4,6 +4,7 @@ package com.magneticsource.msource.ingreso;
 import android.content.Context;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 import com.magneticsource.msource.R;
@@ -64,10 +65,11 @@ public class Login {
         return true;
     }
 
-    public void cerrarSesion(){
-        Datos d =new Datos(context);
+    public static void cerrarSesion(AppCompatActivity c){
+        Datos d =new Datos(c);
         d.removeString(Datos.USUARIO);
         d.removeString(Datos.TIPO_USUARIO);
+        c.finish();
     }
 
 

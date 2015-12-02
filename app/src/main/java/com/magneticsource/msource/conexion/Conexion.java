@@ -1,6 +1,7 @@
 package com.magneticsource.msource.conexion;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.nfc.NfcAdapter;
@@ -74,6 +75,16 @@ public class Conexion {
             return  true;
         Toast.makeText(context, R.string.error_adaptador_nfc, Toast.LENGTH_LONG).show();
         return false;
+	}
+
+	public static void activarNFC(Context c){
+		NfcAdapter  mNfcAdapter = NfcAdapter.getDefaultAdapter(c);
+		if(mNfcAdapter!= null && !mNfcAdapter.isEnabled()) {
+			Toast.makeText(c, R.string.error_adaptador_nfc_prender, Toast.LENGTH_LONG).show();
+			Intent i = new Intent("android.settings.NFC_SETTINGS");
+			i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			c.startActivity(i);
+		}
 	}
 
 	public void mostrarError(){

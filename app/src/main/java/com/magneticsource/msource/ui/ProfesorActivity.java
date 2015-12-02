@@ -24,9 +24,11 @@ import android.widget.Toast;
 
 import com.magneticsource.msource.R;
 import com.magneticsource.msource.asistencia.AsistenciaActualTask;
+import com.magneticsource.msource.conexion.Conexion;
 import com.magneticsource.msource.control.Alumno;
 import com.magneticsource.msource.control.Datos;
 import com.magneticsource.msource.control.Profesor;
+import com.magneticsource.msource.ingreso.Login;
 
 import java.util.Arrays;
 
@@ -87,9 +89,16 @@ public class ProfesorActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Login.cerrarSesion(this);
             return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Conexion.activarNFC(this);
     }
 }

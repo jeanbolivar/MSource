@@ -1,5 +1,6 @@
 package com.magneticsource.msource.ui;
 
+import android.content.Intent;
 import android.nfc.NfcAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,10 +9,12 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.magneticsource.msource.conexion.Conexion;
 import com.magneticsource.msource.control.Alumno;
 import com.magneticsource.msource.control.Datos;
 import com.magneticsource.msource.R;
 import com.magneticsource.msource.control.Persona;
+import com.magneticsource.msource.ingreso.Login;
 
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
@@ -37,27 +40,27 @@ public class AlumnoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_alumno);
-
-        txvAlumno = (TextView) findViewById(R.id.ala_txvAlumno);
-        img =(ImageView) findViewById(R.id.ala_imvFoto);
-
-        Datos d =new Datos(getApplicationContext());
-        alumno = Alumno.fromString(d.getString(Datos.USUARIO));
-
-        txvAlumno.setText(alumno.getNombreCompleto());
-
-        if (alumno.getImageURL().length()>0) {
-            ImageLoadTask load = new ImageLoadTask(alumno.getImageURL(),
-                    img);
-            load.execute();
-        }
-
         mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
 
-        mNdefMessage = new NdefMessage(
-                new NdefRecord[] {
-                        createNewTextRecord(alumno.getDni()+Datos.SEPARADOR1+alumno.getNombreCompleto(), Locale.ENGLISH, true)});
+            setContentView(R.layout.activity_alumno);
+
+            txvAlumno = (TextView) findViewById(R.id.ala_txvAlumno);
+            img =(ImageView) findViewById(R.id.ala_imvFoto);
+
+            Datos d =new Datos(getApplicationContext());
+            alumno = Alumno.fromString(d.getString(Datos.USUARIO));
+
+            txvAlumno.setText(alumno.getNombreCompleto());
+
+            if (alumno.getImageURL().length()>0) {
+                ImageLoadTask load = new ImageLoadTask(alumno.getImageURL(),
+                        img);
+                load.execute();
+            }
+
+            mNdefMessage = new NdefMessage(
+                    new NdefRecord[] {
+                            createNewTextRecord(alumno.getDni()+Datos.SEPARADOR1+alumno.getNombreCompleto(), Locale.ENGLISH, true)});
     }
 
     public static NdefRecord createNewTextRecord(String text, Locale locale, boolean encodeInUtf8) {
@@ -80,7 +83,7 @@ public class AlumnoActivity extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
-
+        Conexion.activarNFC(this);
         if (mNfcAdapter != null)
             mNfcAdapter.enableForegroundNdefPush(this, mNdefMessage);
     }
@@ -109,6 +112,7 @@ public class AlumnoActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Login.cerrarSesion(this);
             return true;
         }
 
