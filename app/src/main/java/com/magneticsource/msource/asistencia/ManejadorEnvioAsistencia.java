@@ -17,6 +17,7 @@ import com.magneticsource.msource.conexion.AsistenciaCliente;
 import com.magneticsource.msource.conexion.Conexion;
 import com.magneticsource.msource.control.Datos;
 import com.magneticsource.msource.seguridad.Encryptador;
+import com.magneticsource.msource.seguridad.Token;
 import com.magneticsource.msource.ui.CapturarActivity;
 import com.magneticsource.msource.ui.MainActivity;
 
@@ -35,6 +36,7 @@ public class ManejadorEnvioAsistencia extends Service{
     private String[] alumnos_dni;
     private String[] alumnos_nombres;
     private String hora;
+    private Token token;
 
     @Override
     public void onCreate() {
@@ -60,7 +62,7 @@ public class ManejadorEnvioAsistencia extends Service{
         }
 
         hora = new SimpleDateFormat("HH:mm:ss").format(new Date());
-        Log.e(hora,hora);
+        token =new Token(hora);
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -69,7 +71,7 @@ public class ManejadorEnvioAsistencia extends Service{
                 while (!termino){
                     Conexion c =new Conexion(getBaseContext());
                     if(c.verificarConexionInternet()){
-                        if(AsistenciaCliente.setAsistencia(dni_docente, clave, alumnos_dni, Encryptador.Encriptar(hora),hora,id_grupo)){
+                            if(AsistenciaCliente.setAsistencia(dni_docente, clave, alumnos_dni, token.getToken(),hora,id_grupo)){
                             int cantidad = alumnos_dni.length;
                             String cantidadAlumnos = cantidad+" alumno"+ (cantidad==1?"":"");
                             String ticker= getString(R.string.mensaje_asistenciaTomada) + " para "+ cantidadAlumnos;

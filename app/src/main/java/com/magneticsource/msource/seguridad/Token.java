@@ -8,15 +8,16 @@ import java.util.Date;
  */
 public class Token {
 
-    private Time hora;
-    public Token(Time hora){
+    private String hora;
+    public Token(String hora){
         this.hora = hora;
     }
 
     public String getToken()
     {
         //algoritmo de encriptacion para crear el token de acuerdo a la hora.
-        String encriptacion = "";
+        String encriptacion = Encryptador.Encriptar(hora);
+
         return encriptacion;
     }
 }

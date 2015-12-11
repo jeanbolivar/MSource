@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import com.magneticsource.msource.R;
 import com.magneticsource.msource.asistencia.Asistencia;
 import com.magneticsource.msource.asistencia.ManejadorEnvioAsistencia;
+import com.magneticsource.msource.asistencia.TomarAsistencia;
 import com.magneticsource.msource.control.Datos;
 import com.magneticsource.msource.control.Profesor;
 
@@ -46,6 +47,7 @@ public class CapturarActivity extends AppCompatActivity {
     private TextView txvAula;
     private Button btnTerminar;
     private Asistencia asistencia;
+    private TomarAsistencia tomarAsistencia;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,34 +67,21 @@ public class CapturarActivity extends AppCompatActivity {
             txvHora = (TextView) findViewById(R.id.caa_txvInicioFin);
             txvAula = (TextView) findViewById(R.id.caa_txvAula);
 
-            txvHora.setText(asistencia.getHoraInicio() + " - " + asistencia.getHoraFin());
+                txvHora.setText(asistencia.getHoraInicio() + " - " + asistencia.getHoraFin());
             txvNombreCurso.setText(asistencia.getNombreCurso());
             txvNombreGrupo.setText(asistencia.getNombreGrupo());
             txvAula.setText(asistencia.getNombreAula());
 
             Datos d  =new Datos(getBaseContext());
             profesor = Profesor.fromString(d.getString(Datos.USUARIO));
-            dni_alumnos=new ArrayList<String>();
+            tomarAsistencia =new TomarAsistencia(getBaseContext(), profesor, asistencia);
 
             loadIntentFilter();
 
             btnTerminar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
-                    Intent i = new Intent(getBaseContext(), ManejadorEnvioAsistencia.class);
-                    i.putExtra(Datos.USUARIO, profesor.getDni());
-                    i.putExtra("clave", profesor.getClave());
-                    i.putExtra("id_grupo", asistencia.getIdGrupo());
-
-                    if(dni_alumnos.size()>0) {
-                        String[] asistentes = new String[dni_alumnos.size()];
-                        for (int j = 0; j < asistentes.length; j++) {
-                            asistentes[j] = dni_alumnos.get(j);
-                        }
-                        i.putExtra(Datos.ASISTENTES, asistentes);
-                    }
-                    startService(i);
+                    tomarAsistencia.cerrarAsistencia();
                     finish();
                 }
             });
@@ -174,23 +163,13 @@ public class CapturarActivity extends AppCompatActivity {
                 Log.e("TagDispatch", e.toString());
             }
         }
+        tomarAsistencia.recibirAsistente(s);
 
-        Toast.makeText(this, s.split(Datos.SEPARADOR1)[1],Toast.LENGTH_LONG).show();
-        if(!tieneRepetido(s))
-            dni_alumnos.add(s);
-    }
-
-    public boolean tieneRepetido(String dni){
-        for(String s : dni_alumnos)
-            if(dni.equals(s))
-                return true;
-        return false;
     }
 
     @Override
     public void onResume() {
         super.onResume();
-
         if (nfcAdapter != null)
             nfcAdapter.enableForegroundDispatch(this, mPendingIntent, mIntentFilters, mNFCTechLists);
     }
@@ -198,7 +177,6 @@ public class CapturarActivity extends AppCompatActivity {
     @Override
     public void onPause() {
         super.onPause();
-
         if (nfcAdapter != null)
             nfcAdapter.disableForegroundDispatch(this);
     }

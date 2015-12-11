@@ -41,24 +41,23 @@ public class AlumnoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
+        setContentView(R.layout.activity_alumno);
 
-            setContentView(R.layout.activity_alumno);
+        txvAlumno = (TextView) findViewById(R.id.ala_txvAlumno);
+        img =(ImageView) findViewById(R.id.ala_imvFoto);
 
-            txvAlumno = (TextView) findViewById(R.id.ala_txvAlumno);
-            img =(ImageView) findViewById(R.id.ala_imvFoto);
+        Datos d =new Datos(getApplicationContext());
+        alumno = Alumno.fromString(d.getString(Datos.USUARIO));
 
-            Datos d =new Datos(getApplicationContext());
-            alumno = Alumno.fromString(d.getString(Datos.USUARIO));
+        txvAlumno.setText(alumno.getNombreCompleto());
 
-            txvAlumno.setText(alumno.getNombreCompleto());
+        if (alumno.getImageURL().length()>0) {
+            ImageLoadTask load = new ImageLoadTask(alumno.getImageURL(),
+                    img);
+            load.execute();
+        }
 
-            if (alumno.getImageURL().length()>0) {
-                ImageLoadTask load = new ImageLoadTask(alumno.getImageURL(),
-                        img);
-                load.execute();
-            }
-
-            mNdefMessage = new NdefMessage(
+        mNdefMessage = new NdefMessage(
                     new NdefRecord[] {
                             createNewTextRecord(alumno.getDni()+Datos.SEPARADOR1+alumno.getNombreCompleto(), Locale.ENGLISH, true)});
     }

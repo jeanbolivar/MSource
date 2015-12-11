@@ -14,6 +14,8 @@ public class Datos {
     public static final String USUARIO = "Usuario";
     public static final String ASISTENCIA = "Asistencia";
     public static final String ASISTENTES = "Asistentes";
+    public static final String CLAVE = "clave";
+    public static final String ID_GRUPO = "id_grupo";
     public static String SEPARADOR1 = "█";
     private Context context;
     private SharedPreferences preferences;
